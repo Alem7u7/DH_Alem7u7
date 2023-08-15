@@ -1,4 +1,5 @@
 const prompt = require("prompt-sync")({singint: true});
+/*nom install prompt-sync*/
 
 let edad;
 let negativo = -1;
