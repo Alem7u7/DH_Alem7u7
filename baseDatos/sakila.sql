@@ -40,3 +40,13 @@ SELECT customer_id, sum(amount) as Amount, count(rental_id) as Rentals FROM saki
 /*4. Generar un reporte que indique: ID de cliente, cantidad de alquileres y monto total para todos los clientes que hayan gastado más de 150 dólares en alquileres.*/
 
 SELECT customer_id, count(rental_id), sum(amount) as total FROM sakila.payment where sum(amount) >= 150 group by customer_id order by total desc  ;
+
+/*5. Generar un reporte que muestre por mes de alquiler (rental_date de tabla rental), la cantidad de alquileres y 
+la suma total pagada (amount de tabla payment) para el año de alquiler 2005 (rental_date de tabla rental). */
+
+SELECT count(rental.rental_id), sum(payment.amount) FROM sakila.rental inner join sakila.payment on rental.rental_id = payment.rental_id where extract(year from rental_date) = 2005;
+
+/*6. Generar un reporte que responda a la pregunta: ¿cuáles son los 5 inventarios más alquilados? (columna inventory_id en la tabla rental).
+Para cada una de ellas indicar la cantidad de alquileres. */
+
+SELECT inventory_id, count(rental_id) FROM sakila.rental group by inventory_id order by count(rental_id) desc limit 5;
